@@ -234,11 +234,15 @@ ul {
 }
 
 .hero__content {
-  background: rgba(8, 26, 52, 0.75);
-  padding: clamp(2rem, 4vw, 3rem);
+  position: relative;
+  background: linear-gradient(150deg, rgba(8, 26, 52, 0.9) 0%, rgba(12, 47, 85, 0.86) 55%, rgba(19, 137, 201, 0.38) 100%);
+  padding: clamp(2.2rem, 5vw, 3.4rem);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(90, 192, 242, 0.28);
+  max-width: min(640px, 100%);
+  overflow: hidden;
 }
 
 .badge {
@@ -260,8 +264,17 @@ ul {
   margin-top: 1.5rem;
 }
 
+.hero h1 {
+  word-break: break-word;
+}
+
 .hero h1 span {
-  color: var(--color-blue-300);
+  color: var(--color-white);
+  background: linear-gradient(135deg, rgba(90, 192, 242, 0.22), rgba(19, 137, 201, 0.25));
+  padding: 0.1em 0.35em;
+  border-radius: 0.5em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .hero p {
