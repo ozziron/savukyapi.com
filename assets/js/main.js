@@ -94,10 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    conceptSlides.forEach((slide, index) => {
+      slide.setAttribute('aria-hidden', index === conceptIndex ? 'false' : 'true');
+    });
+
     const activateConceptSlide = (index) => {
       const normalized = (index + conceptSlides.length) % conceptSlides.length;
       conceptSlides.forEach((slide, i) => {
         slide.classList.toggle('is-active', i === normalized);
+        slide.setAttribute('aria-hidden', i === normalized ? 'false' : 'true');
       });
       conceptDots.forEach((dot, i) => {
         dot.classList.toggle('is-active', i === normalized);

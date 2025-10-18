@@ -376,23 +376,24 @@ ul {
 
 .hero__panel {
   align-self: stretch;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   border-radius: var(--radius-lg);
-  padding: clamp(2rem, 5vw, 3rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
   color: var(--color-dark);
   box-shadow: var(--shadow-soft);
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
 .concept-slider {
   position: relative;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  row-gap: clamp(1.25rem, 2vw, 1.75rem);
+  height: 100%;
+  align-items: stretch;
 }
 
 .concept-slider__viewport {
@@ -401,26 +402,28 @@ ul {
   overflow: hidden;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
-  background: rgba(12, 47, 85, 0.06);
-}
-
-.concept-slider__viewport::before {
-  content: "";
-  display: block;
-  padding-bottom: 68%;
+  background: var(--color-white);
+  min-height: clamp(320px, 55vh, 520px);
 }
 
 .concept-slide {
   position: absolute;
   inset: 0;
-  display: none;
+  display: flex;
   flex-direction: column;
   margin: 0;
   background: var(--color-white);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
 }
 
 .concept-slide.is-active {
-  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 1;
 }
 
 .concept-slide img {
@@ -428,19 +431,20 @@ ul {
   height: 100%;
   object-fit: cover;
   flex: 1;
+  border-bottom: 1px solid rgba(12, 47, 85, 0.12);
 }
 
 .concept-slide figcaption {
-  padding: 0.85rem 1rem;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  padding: 1.1rem 1.25rem;
+  font-size: 0.96rem;
+  line-height: 1.45;
   color: var(--color-blue-900);
-  background: linear-gradient(135deg, rgba(90, 192, 242, 0.1), rgba(12, 47, 85, 0.08));
+  background: linear-gradient(135deg, rgba(90, 192, 242, 0.12), rgba(12, 47, 85, 0.08));
 }
 
 .concept-slider__control {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 1rem);
   transform: translateY(-50%);
   width: 44px;
   height: 44px;
@@ -471,6 +475,8 @@ ul {
 
 .concept-slider__dots {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.65rem;
 }
 
@@ -867,11 +873,15 @@ ul {
 
   .hero__content,
   .hero__panel {
-    padding: 2rem;
+    padding: 1.75rem;
   }
 
   .concept-slider {
-    gap: 1rem;
+    row-gap: 1rem;
+  }
+
+  .concept-slider__viewport {
+    min-height: clamp(260px, 52vh, 400px);
   }
 
   .concept-slider__control {
@@ -917,10 +927,19 @@ ul {
 
   .hero__panel {
     order: -1;
+    padding: 1.5rem;
   }
 
   .concept-slider__control {
     display: none;
+  }
+
+  .concept-slider {
+    row-gap: 0.85rem;
+  }
+
+  .concept-slider__viewport {
+    min-height: 260px;
   }
 
   .hero__dots {
