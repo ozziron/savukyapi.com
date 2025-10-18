@@ -46,6 +46,10 @@ img {
   display: block;
 }
 
+figure {
+  margin: 0;
+}
+
 h1,
 h2,
 h3 {
@@ -197,8 +201,7 @@ ul {
 .hero__slide {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   opacity: 0;
   transform: scale(1.05);
   transition: opacity 1.2s ease, transform 12s linear;
@@ -207,6 +210,13 @@ ul {
 .hero__slide.is-active {
   opacity: 1;
   transform: scale(1.12);
+}
+
+.hero__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
 }
 
 .hero__gradient {
@@ -269,12 +279,7 @@ ul {
 }
 
 .hero h1 span {
-  color: var(--color-white);
-  background: linear-gradient(135deg, rgba(90, 192, 242, 0.22), rgba(19, 137, 201, 0.25));
-  padding: 0.1em 0.35em;
-  border-radius: 0.5em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  color: var(--color-blue-300);
 }
 
 .hero p {
@@ -522,9 +527,19 @@ ul {
 
 .work-card__image {
   position: relative;
-  padding-top: 62%;
-  background-size: cover;
-  background-position: center;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.work-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 8s ease;
+}
+
+.work-card:hover .work-card__image img {
+  transform: scale(1.08);
 }
 
 .work-card__body {
