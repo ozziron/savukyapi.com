@@ -9,8 +9,26 @@ Savuk Yapı'nın Samsun merkezli inşaat ve yapı hizmetlerini tanıtmak için h
 - Öne çıkan projeler listesi
 - İletişim formu ve iletişim bilgileri
 
-## Geliştirme
+## Yerel geliştirme ve canlı önizleme
 
-Statik dosyalar `index.html`, `assets/css/styles.css` ve `assets/js/main.js` içerisinde bulunur. Dosyaları düzenleyerek içerik veya stil değişiklikleri yapabilirsiniz.
+Projeyi yerelde canlı olarak test edebilmek için depoda basit bir Node.js statik sunucusu bulunur.
 
-Siteyi yerelde görüntülemek için herhangi bir statik sunucu (örneğin `python -m http.server`) kullanabilirsiniz.
+1. [Node.js](https://nodejs.org/) 18 veya üzeri bir sürümü kurun.
+2. Depo dizininde aşağıdaki komutu çalıştırarak sunucuyu başlatın:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Tarayıcınızdan `http://localhost:4173` adresine giderek siteyi canlı olarak görüntüleyin.
+
+Sunucu `HOST` ve `PORT` ortam değişkenlerini okuyarak farklı bağlantı noktaları üzerinden de çalıştırılabilir. Log çıktısı üzerinden aktif adres bilgisi paylaşılır.
+
+## Dosya yapısı
+
+- `index.html`: Ana sayfa içeriği
+- `assets/css/styles.css`: Stil dosyaları
+- `assets/js/main.js`: Etkileşimli davranışlar
+- `server.js`: Yerel geliştirme için kullanılan basit Node.js statik sunucusu
+
+Değişiklik yapmak için ilgili dosyaları güncellemeniz yeterlidir.
