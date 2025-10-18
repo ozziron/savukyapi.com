@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   const slides = Array.from(document.querySelectorAll('.hero__slide'));
   const dots = Array.from(document.querySelectorAll('.hero__dot'));
+  const conceptSlides = Array.from(document.querySelectorAll('.concept-slide'));
+  const conceptDots = Array.from(document.querySelectorAll('.concept-slider__dot'));
+  const conceptPrev = document.querySelector('.concept-slider__control--prev');
+  const conceptNext = document.querySelector('.concept-slider__control--next');
+  const conceptSlider = document.querySelector('.concept-slider');
 
   if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
@@ -76,5 +81,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     activateSlide(0);
     startAutoplay();
+  }
+
+  if (conceptSlides.length) {
+    let conceptIndex = conceptSlides.findIndex((slide) => slide.classList.contains('is-active'));
+    if (conceptIndex < 0) {
+      conceptIndex = 0;
+      conceptSlides[0].classList.add('is-active');
+      if (conceptDots[0]) {
+        conceptDots[0].classList.add('is-active');
+        conceptDots[0].setAttribute('aria-selected', 'true');
+      }
+    }
+
+    const activateConceptSlide = (index) => {
+      const normalized = (index + conceptSlides.length) % conceptSlides.length;
+      conceptSlides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === normalized);
+      });
+      conceptDots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === normalized);
+        dot.setAttribute('aria-selected', i === normalized ? 'true' : 'false');
+      });
+      conceptIndex = normalized;
+    };
+
+    if (conceptPrev) {
+      conceptPrev.addEventListener('click', () => {
+        activateConceptSlide(conceptIndex - 1);
+      });
+    }
+
+    if (conceptNext) {
+      conceptNext.addEventListener('click', () => {
+        activateConceptSlide(conceptIndex + 1);
+      });
+    }
+
+    conceptDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        activateConceptSlide(index);
+      });
+    });
+
+    if (conceptSlider) {
+      conceptSlider.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          activateConceptSlide(conceptIndex - 1);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          activateConceptSlide(conceptIndex + 1);
+        }
+      });
+    }
   }
 });
